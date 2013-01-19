@@ -31,16 +31,6 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0"
                             Orientation="Horizontal" 
-                            HorizontalAlignment="Left" 
-                            VerticalAlignment="Top">
-                    <Button x:Name="EditButton" 
-                            Style="{StaticResource EditAppBarButtonStyle}" 
-                            Loaded="StartLayoutUpdates"
-                            Unloaded="StopLayoutUpdates"
-                            Click="EditButton_Click"/>
-                </StackPanel>
-                <StackPanel Grid.Column="1"
-                            Orientation="Horizontal" 
                             HorizontalAlignment="Right" 
                             VerticalAlignment="Top">
                     <Button x:Name="AddButton" 
@@ -99,7 +89,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
-            <TextBlock x:Name="pageTitle" Grid.Column="1" Text="Budgeting" IsHitTestVisible="false" Style="{StaticResource PageHeaderTextStyle}"/>
+            <TextBlock x:Name="pageTitle" Grid.Column="1" IsHitTestVisible="false" Style="{StaticResource PageHeaderTextStyle}" Text="Budget Helper"/>
         </Grid>
 
         <VisualStateManager.VisualStateGroups>

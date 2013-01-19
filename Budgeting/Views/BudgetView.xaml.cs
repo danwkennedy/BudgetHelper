@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using Windows.Foundation;
@@ -14,17 +13,19 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using BudgetHelper.ViewModels;
 
-// The Items Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234233
+// The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
 namespace BudgetHelper.Views
 {
     /// <summary>
-    /// A page that displays a collection of item previews.  In the Split Application this page
-    /// is used to display and select one of the available groups.
+    /// A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class MainPage : BudgetHelper.Common.LayoutAwarePage
+    public sealed partial class BudgetView : BudgetHelper.Common.LayoutAwarePage
     {
-        public MainPage()
+
+        protected BudgetViewModel Budget { get; set; }
+
+        public BudgetView()
         {
             this.InitializeComponent();
         }
@@ -40,34 +41,21 @@ namespace BudgetHelper.Views
         /// session.  This will be null the first time a page is visited.</param>
         protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
         {
-            BudgetViewModel budgetViewModel = new BudgetViewModel();
-            ObservableCollection<BudgetViewModel> collection = budgetViewModel.getBudgets();
-            this.DefaultViewModel["Items"] = budgetViewModel.getBudgets();
-        }
-
-        private void ItemView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            if (e.ClickedItem != null)
+            if (navigationParameter.GetType() == typeof(BudgetViewModel))
             {
-                Frame.Navigate(typeof(BudgetView), e.ClickedItem);
+                Budget = (BudgetViewModel) navigationParameter;
+                pageTitle.Text = Budget.Title;
             }
         }
 
-        private void AddButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Preserves state associated with this page in case the application is suspended or the
+        /// page is discarded from the navigation cache.  Values must conform to the serialization
+        /// requirements of <see cref="SuspensionManager.SessionState"/>.
+        /// </summary>
+        /// <param name="pageState">An empty dictionary to be populated with serializable state.</param>
+        protected override void SaveState(Dictionary<String, Object> pageState)
         {
-
         }
-    }
-
-    public class TestData
-    {
-        public TestData(string title, string description)
-        {
-            this.Title = title;
-            this.Description = description;
-        }
-
-        public string Title { get; set; }
-        public string Description { get; set; }
     }
 }

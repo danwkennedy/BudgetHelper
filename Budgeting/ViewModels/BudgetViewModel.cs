@@ -9,7 +9,7 @@ using Windows.UI.Xaml;
 
 namespace BudgetHelper.ViewModels
 {
-    class BudgetViewModel : ViewModel
+    public class BudgetViewModel : ViewModel
     {
 
         #region Properties

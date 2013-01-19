@@ -127,6 +127,9 @@
     <Compile Include="ViewModels\BudgetViewModel.cs" />
     <Compile Include="ViewModels\EnvelopeViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
+    <Compile Include="Views\BudgetView.xaml.cs">
+      <DependentUpon>BudgetView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -135,7 +138,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="BudgetHelper_TemporaryKey.pfx" />
+    <None Include="Budgeting_TemporaryKey.pfx" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +156,10 @@
     <Page Include="Common\StandardStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\BudgetView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainPage.xaml">
       <SubType>Designer</SubType>

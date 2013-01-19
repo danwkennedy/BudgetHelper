@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BudgetHelper.ViewModels
 {
-    abstract class ViewModel
+    public abstract class ViewModel
     {
 
         public ViewModel find(int modelId)

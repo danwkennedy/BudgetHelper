@@ -67,18 +67,6 @@ namespace BudgetHelper
                     // Create the tables if they don't exist
                     db.CreateTable<Budget>();
                     db.CreateTable<BudgetEnvelope>();
-
-                    db.DeleteAll<Budget>();
-
-                    // Add seed customers and projects
-                    db.Insert(new Budget()
-                    {
-                        Id = 1,
-                        Name = "Adventure Works",
-                        //DateCreated = new DateTime(),
-                        MonthlyTakeHome = 1000.0f,
-                        Frequency = PaycheckFrequency.Monthly
-                    });
                 }
 
                 // Place the frame in the current Window
