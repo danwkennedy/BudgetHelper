@@ -34,7 +34,7 @@ namespace BudgetHelper.ViewModels
                 budget.Id = _budget.Id;
                 budget.Title = _budget.Name;
                 budget.DateCreated = _budget.DateCreated;
-                budget.MonthlyTakeHome = _budget.MonthlyTakeHome;
+                budget.MonthlyTakeHome = _budget.PaycheckAmount;
                 budget.Frequency = _budget.Frequency;
             }
 
@@ -55,7 +55,7 @@ namespace BudgetHelper.ViewModels
                     budget.Id = _budget.Id;
                     budget.Title = _budget.Name;
                     budget.DateCreated = _budget.DateCreated;
-                    budget.MonthlyTakeHome = _budget.MonthlyTakeHome;
+                    budget.MonthlyTakeHome = _budget.PaycheckAmount;
                     budget.Frequency = _budget.Frequency;
 
                     budgets.Add(budget);

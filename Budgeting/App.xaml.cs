@@ -67,6 +67,18 @@ namespace BudgetHelper
                     // Create the tables if they don't exist
                     db.CreateTable<Budget>();
                     db.CreateTable<BudgetEnvelope>();
+
+                    db.DeleteAll<Budget>();
+
+                    db.Insert(new Budget()
+                    {
+                        Id = 1,
+                        PaycheckAmount = 1000.0f,
+                        Frequency = PaycheckFrequency.SemiMonthly,
+                        Name = "My New Budget"
+                    });
+
+                    Budget b = db.Table<Budget>().First();
                 }
 
                 // Place the frame in the current Window

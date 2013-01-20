@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using BudgetHelper.ViewModels;
+using BudgetHelper.Models;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -45,6 +46,13 @@ namespace BudgetHelper.Views
             {
                 Budget = (BudgetViewModel) navigationParameter;
                 pageTitle.Text = Budget.Title;
+
+                PaycheckAmount.Text = String.Format("{0:C2}", Budget.MonthlyTakeHome);
+                PayFrequency.Text = Budget.Frequency.ToString();
+
+                TakeHome.Text = String.Format("{0:C2} per month", Budget.Frequency.MonthlyAmount(Budget.MonthlyTakeHome));
+
+                //TakeHome.Text = String.Format("{0:C2} per month", 
             }
         }
 
@@ -56,6 +64,16 @@ namespace BudgetHelper.Views
         /// <param name="pageState">An empty dictionary to be populated with serializable state.</param>
         protected override void SaveState(Dictionary<String, Object> pageState)
         {
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
