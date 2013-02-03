@@ -1,17 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 using BudgetHelper.ViewModels;
 
 // The Items Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234233
@@ -41,15 +32,21 @@ namespace BudgetHelper.Views
         protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
         {
             BudgetViewModel budgetViewModel = new BudgetViewModel();
-            ObservableCollection<BudgetViewModel> collection = budgetViewModel.getBudgets();
-            this.DefaultViewModel["Items"] = budgetViewModel.getBudgets();
+
+            ObservableCollection<NavigationItem> collection = new ObservableCollection<NavigationItem>();
+            Object obj = typeof(BudgetView);
+            collection.Add(new NavigationItem("Budget", typeof(BudgetView)));
+            collection.Add(new NavigationItem("Accounts", typeof(AccountsView)));
+            collection.Add(new NavigationItem("Add Revenue", typeof(AddRevenue)));
+            collection.Add(new NavigationItem("Add an Expense", typeof(AddExpense)));
+            DefaultViewModel["Items"] = collection;
         }
 
         private void ItemView_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (e.ClickedItem != null)
             {
-                Frame.Navigate(typeof(BudgetView), e.ClickedItem);
+                Frame.Navigate(((NavigationItem) e.ClickedItem).Target, e.ClickedItem);
             }
         }
 
@@ -59,15 +56,24 @@ namespace BudgetHelper.Views
         }
     }
 
-    public class TestData
+    public class NavigationItem
     {
-        public TestData(string title, string description)
-        {
-            this.Title = title;
-            this.Description = description;
-        }
+
+        #region Properties
 
         public string Title { get; set; }
+        public string SubTitle { get; set; }
         public string Description { get; set; }
+        public System.Type Target { get; set; }
+
+        #endregion
+
+        public NavigationItem(string title, System.Type target)
+        {
+            Title = title;
+            Target = target;
+        }
+        
     }
+
 }

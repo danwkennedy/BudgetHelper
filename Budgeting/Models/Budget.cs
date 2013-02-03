@@ -36,4 +36,5 @@ namespace BudgetHelper.Models
             }
         }
     }
+
 }

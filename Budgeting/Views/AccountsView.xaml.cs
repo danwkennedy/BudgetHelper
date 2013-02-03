@@ -11,9 +11,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using BudgetHelper.ViewModels;
-using BudgetHelper.Models;
-using System.Collections.ObjectModel;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -22,12 +19,9 @@ namespace BudgetHelper.Views
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class BudgetView : BudgetHelper.Common.LayoutAwarePage
+    public sealed partial class AccountsView : BudgetHelper.Common.LayoutAwarePage
     {
-
-        protected BudgetViewModel Budget { get; set; }
-
-        public BudgetView()
+        public AccountsView()
         {
             this.InitializeComponent();
         }
@@ -43,18 +37,6 @@ namespace BudgetHelper.Views
         /// session.  This will be null the first time a page is visited.</param>
         protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
         {
-            BudgetViewModel budgets = new BudgetViewModel();
-            Budget = budgets.getBudgets()[0];
-
-            ObservableCollection<ListItem> generalList = new ObservableCollection<ListItem>();
-            generalList.Add(new ListItem("Paycheck Amount", String.Format("{0:C2}", Budget.MonthlyTakeHome)));
-            generalList.Add(new ListItem("Frequency", Budget.Frequency.ToString()));
-            generalList.Add(new ListItem("Take Home", String.Format("{0:C2} per month", Budget.Frequency.MonthlyAmount(Budget.MonthlyTakeHome))));
-
-            GeneralInfoList.Items.Add(new ListItem("Paycheck Amount", String.Format("{0:C2}", Budget.MonthlyTakeHome)));
-            GeneralInfoList.Items.Add(new ListItem("Frequency", Budget.Frequency.ToString()));
-            GeneralInfoList.Items.Add(new ListItem("Take Home", String.Format("{0:C2} per month", Budget.Frequency.MonthlyAmount(Budget.MonthlyTakeHome))));
-
         }
 
         /// <summary>
@@ -65,28 +47,6 @@ namespace BudgetHelper.Views
         /// <param name="pageState">An empty dictionary to be populated with serializable state.</param>
         protected override void SaveState(Dictionary<String, Object> pageState)
         {
-        }
-
-        private void EditButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-    }
-
-    public class ListItem
-    {
-        public string Label { get; set; }
-        public string Value { get; set; }
-
-        public ListItem(string label, string value)
-        {
-            Label = label;
-            Value = value;
         }
     }
 }

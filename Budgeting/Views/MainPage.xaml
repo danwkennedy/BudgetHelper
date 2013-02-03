@@ -11,17 +11,12 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-
-        <!-- Collection of items displayed by this page -->
-        <CollectionViewSource
+        <CollectionViewSource 
             x:Name="itemsViewSource"
             Source="{Binding Items}"/>
-
-        <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
-        <x:String x:Key="AppName">My Application</x:String>
     </Page.Resources>
 
-    <Page.BottomAppBar>
+    <!--<Page.BottomAppBar>
         <AppBar x:Name="MainPageAppBar"
                 Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
             <Grid>
@@ -41,7 +36,7 @@
                 </StackPanel>
             </Grid>
         </AppBar>
-    </Page.BottomAppBar>
+    </Page.BottomAppBar>-->
 
     <!--
         This grid acts as a root panel for the page that defines two rows:

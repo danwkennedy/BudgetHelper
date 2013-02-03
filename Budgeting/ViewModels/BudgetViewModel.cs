@@ -16,9 +16,25 @@ namespace BudgetHelper.ViewModels
 
         public int Id { get; set; }
         public DateTime DateCreated { get; set; }
-        public string Title { get; set; }
+        public string Name { get; set; }
         public float MonthlyTakeHome { get; set; }
         public PaycheckFrequency Frequency { get; set; }
+
+        public string Title
+        {
+            get
+            {
+                return Name;
+            }
+        }
+
+        public string Subtitle
+        {
+            get
+            {
+                return "This is the Subtitle";
+            }
+        }
 
         #endregion
 
@@ -32,7 +48,7 @@ namespace BudgetHelper.ViewModels
             {
                 Budget _budget = db.Table<Budget>().Where(b => b.Id == budgetId).Single();
                 budget.Id = _budget.Id;
-                budget.Title = _budget.Name;
+                budget.Name = _budget.Name;
                 budget.DateCreated = _budget.DateCreated;
                 budget.MonthlyTakeHome = _budget.PaycheckAmount;
                 budget.Frequency = _budget.Frequency;
@@ -53,7 +69,7 @@ namespace BudgetHelper.ViewModels
                 {
                     BudgetViewModel budget = new BudgetViewModel();
                     budget.Id = _budget.Id;
-                    budget.Title = _budget.Name;
+                    budget.Name = _budget.Name;
                     budget.DateCreated = _budget.DateCreated;
                     budget.MonthlyTakeHome = _budget.PaycheckAmount;
                     budget.Frequency = _budget.Frequency;

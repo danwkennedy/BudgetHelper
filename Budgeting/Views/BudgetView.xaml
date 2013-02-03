@@ -1,22 +1,16 @@
-﻿<common:LayoutAwarePage
+﻿<common:LayoutAwarePage xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:BudgetHelper.Views" xmlns:common="using:BudgetHelper.Common" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:PieChartUserControl="using:PieChartUserControl"
     x:Name="pageRoot"
     x:Class="BudgetHelper.Views.BudgetView"
-    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:BudgetHelper.Views"
-    xmlns:common="using:BudgetHelper.Common"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Mode=Self}}"
     mc:Ignorable="d">
 
-    <Page.Resources>
+    <common:LayoutAwarePage.Resources>
 
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
         <x:String x:Key="AppName">My Application</x:String>
-    </Page.Resources>
+    </common:LayoutAwarePage.Resources>
 
-    <Page.BottomAppBar>
+    <common:LayoutAwarePage.BottomAppBar>
         <AppBar x:Name="MainPageAppBar"
                 Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
             <Grid>
@@ -40,7 +34,7 @@
                 </StackPanel>
             </Grid>
         </AppBar>
-    </Page.BottomAppBar>
+    </common:LayoutAwarePage.BottomAppBar>
 
     <!--
         This grid acts as a root panel for the page that defines two rows:
@@ -52,29 +46,6 @@
             <RowDefinition Height="140"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <!-- Back button and page title -->
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
-            <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{StaticResource AppName}" Style="{StaticResource PageHeaderTextStyle}"/>
-        </Grid>
-        <Grid HorizontalAlignment="Left" Height="615" Margin="120,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="350">
-            <TextBlock HorizontalAlignment="Left" Margin="0,10,0,0" TextWrapping="Wrap" Text="General Information" VerticalAlignment="Top" Height="34" Width="225" FontSize="24"/>
-            <TextBlock HorizontalAlignment="Right" Margin="0,49,170,0" TextWrapping="Wrap" Text="Paycheck Amount:" VerticalAlignment="Top" Height="22" Width="167" FontSize="20"/>
-            <TextBlock HorizontalAlignment="Right" Margin="0,115,170,0" TextWrapping="Wrap" Text="Frequency:" VerticalAlignment="Top" Height="22" Width="167" FontSize="20"/>
-            <TextBlock HorizontalAlignment="Right" Margin="0,185,170,0" TextWrapping="Wrap" Text="Take Home:" VerticalAlignment="Top" Height="22" Width="167" FontSize="20"/>
-            <TextBlock x:Name="PaycheckAmount" HorizontalAlignment="Right" Margin="0,76,170,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" Width="167" FontSize="20">
-            	<Run Text="$1111.00"/>
-            	<LineBreak/>
-            	<Run/>
-            </TextBlock>
-            <TextBlock x:Name="PayFrequency" HorizontalAlignment="Right" Margin="0,142,170,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" Width="167" FontSize="20" Text="Monthly"/>
-            <TextBlock x:Name="TakeHome" HorizontalAlignment="Right" Margin="0,212,138,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" Width="199" FontSize="20" Text="$1111.00 per month"/>
-        </Grid>
 
         <VisualStateManager.VisualStateGroups>
 
@@ -105,5 +76,41 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
+
+        <!-- Back button and page title -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
+            <TextBlock x:Name="pageTitle" Grid.Column="1" Text="Budget Name" Style="{StaticResource PageHeaderTextStyle}" FontSize="56"/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="628" Grid.Row="1" VerticalAlignment="Top" Width="1366">
+            <StackPanel HorizontalAlignment="Left" Margin="120,0,0,0" VerticalAlignment="Top" Width="348" Height="628">
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="General Information" VerticalAlignment="Top" Height="34" Width="338" FontSize="26.667" FontFamily="Segoe UI Light" Style="{StaticResource PageSubheaderTextStyle}"/>
+                <ListView x:Name="GeneralInfoList" HorizontalAlignment="Left" SelectionMode="None" Height="553" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False" IsTapEnabled="False" ManipulationMode="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HorizontalAlignment="Left" Width="auto" Height="50" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False" IsTapEnabled="False" ManipulationMode="None">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Top" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False" IsTapEnabled="False" ManipulationMode="None">
+                                    <TextBlock Text="{Binding Label}" Style="{StaticResource TitleTextStyle}" Margin="0,0,0,1" TextWrapping="NoWrap" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False" IsTapEnabled="False" ManipulationMode="None" />
+                                    <TextBlock Text="{Binding Value}" Style="{StaticResource BodyTextStyle}" Margin="10,0,0,2" TextWrapping="NoWrap" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False" IsTapEnabled="False" ManipulationMode="None" />
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Left" Margin="473,0,0,0" Width="893">
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Spending Categories" VerticalAlignment="Top" Height="34" Width="873" FontSize="26.667" FontFamily="Segoe UI Light" Style="{StaticResource PageSubheaderTextStyle}"/>
+                <StackPanel Height="543" Margin="0,0,10,0"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </common:LayoutAwarePage>

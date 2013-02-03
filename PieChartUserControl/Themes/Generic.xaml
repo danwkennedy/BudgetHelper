@@ -1,0 +1,24 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PieChartUserControl">
+
+    <Style TargetType="local:PieChartControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:PieChartControl">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"> 
+                        
+                        <!--<Canvas x:Name="Canvas" Width="100%" Height="100%" />-->
+                        <Path Name="PieChartPath" StrokeThickness="1"  
+                            Data="M 10,100 A 100,50 45 1 0 200,100" />
+                        
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
