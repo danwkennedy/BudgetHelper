@@ -132,7 +132,11 @@
     <Compile Include="ViewModels\TransactionViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="Views\AccountsView.xaml.cs">
+      <SubType>Code</SubType>
       <DependentUpon>AccountsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddBudgetView.xaml.cs">
+      <DependentUpon>AddBudgetView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AddExpense.xaml.cs">
       <DependentUpon>AddExpense.xaml</DependentUpon>
@@ -171,6 +175,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\AccountsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AddBudgetView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

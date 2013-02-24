@@ -106,7 +106,7 @@ namespace BudgetHelper.Views
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Frame.Navigate(typeof(AddBudgetView));
         }
 
         
