@@ -25,7 +25,7 @@ namespace BudgetHelper.Views
     public sealed partial class BudgetView : BudgetHelper.Common.LayoutAwarePage
     {
 
-        protected BudgetViewModel Budget { get; set; }
+        //protected BudgetViewModel Budget { get; set; }
 
         public BudgetView()
         {
@@ -44,7 +44,7 @@ namespace BudgetHelper.Views
         protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
         {
             BudgetViewModel budgets = new BudgetViewModel();
-            Budget = budgets.getBudgets()[0];
+            BudgetViewModel Budget = budgets.getBudgets()[0];
 
             ObservableCollection<ListItem> generalList = new ObservableCollection<ListItem>();
             generalList.Add(new ListItem("Paycheck Amount", String.Format("{0:C2}", Budget.MonthlyTakeHome)));

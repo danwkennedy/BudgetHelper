@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BudgetHelper.ViewModels
 {
-    class EnvelopeViewModel : ViewModel
+    class EnvelopeViewModel// : ViewModel
     {
 
     }

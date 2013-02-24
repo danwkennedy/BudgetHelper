@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace BudgetHelper.ViewModels
 {
-    class BudgetsViewModel
+    class TransactionViewModel
     {
+
     }
 }

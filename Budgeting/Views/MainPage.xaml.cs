@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using BudgetHelper.ViewModels;
+using BudgetHelper.Models;
 
 // The Items Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234233
 
@@ -40,20 +41,145 @@ namespace BudgetHelper.Views
             collection.Add(new NavigationItem("Add Revenue", typeof(AddRevenue)));
             collection.Add(new NavigationItem("Add an Expense", typeof(AddExpense)));
             DefaultViewModel["Items"] = collection;
+
+            List<ListItem> transactionTypes = new List<ListItem>();
+            transactionTypes.Add(new ListItem(Models.TransactionType.Credit.ToString(), ((int)Models.TransactionType.Credit).ToString()));
+            transactionTypes.Add(new ListItem(Models.TransactionType.Debit.ToString(), ((int)Models.TransactionType.Debit).ToString()));
+            DefaultViewModel["TransactionTypes"] = transactionTypes;
+
+            DefaultViewModel["Accounts"] = new List<ListItem>();
         }
 
         private void ItemView_ItemClick(object sender, ItemClickEventArgs e)
         {
+            
+
             if (e.ClickedItem != null)
             {
-                Frame.Navigate(((NavigationItem) e.ClickedItem).Target, e.ClickedItem);
+                NavigationItem clickedItem = (NavigationItem)e.ClickedItem;
+
+                if (clickedItem.Target == typeof(AddRevenue))
+                {
+                    DisplayTransactionPopup(Models.TransactionType.Credit);
+                }
+                else if (clickedItem.Target == typeof(AddExpense))
+                {
+                    DisplayTransactionPopup(Models.TransactionType.Debit);
+                }
+                else
+                {
+                    Frame.Navigate(((NavigationItem)e.ClickedItem).Target, e.ClickedItem);
+                }
             }
+        }
+
+        private void DisplayTransactionPopup(Models.TransactionType type)
+        {
+            double width = pageRoot.ActualWidth;
+
+            ((Grid)AddTransactionPopup.Child).Height = Window.Current.Bounds.Height;
+            AddTransactionPopup.HorizontalOffset = Window.Current.Bounds.Width - AddTransactionPopup.ActualWidth;
+
+            foreach (ListItem item in (List<ListItem>)DefaultViewModel["TransactionTypes"])
+            {
+                if (item.Label.Equals(type.ToString()))
+                {
+                    TransactionType.SelectedItem = item;
+                }
+            }
+
+            if (((List<ListItem>)DefaultViewModel["Accounts"]).Count == 0)
+            {
+                List<Account> accounts = (new ViewModel<Account>()).FetchAll();
+
+                List<ListItem> items = new List<ListItem>(accounts.Count);
+                foreach (Account account in accounts)
+                {
+                    items.Add(new ListItem(account.Name, account.Id.ToString()));
+                }
+
+                DefaultViewModel["Accounts"] = items;
+            }
+
+            AddTransactionPopup.IsOpen = true;
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
+
+        
+
+        private void CancelRevenueButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (AddTransactionPopup.IsOpen)
+            {
+                AddTransactionPopup.IsOpen = false;
+            }
+        }
+
+        private void SaveTransactionButton_Click(object sender, RoutedEventArgs e)
+        {
+            Transaction newTransaction = new Transaction();
+
+            double amount;
+            string amountString = TransactionAmount.Text.Replace("$", "").TrimStart();
+
+            if (Double.TryParse(amountString, out amount))
+            {
+                newTransaction.Amount = amount;
+            }
+
+            string destinationString = ((ListItem)TransactionDestination.SelectedItem).Value;
+            int destination = int.Parse(destinationString);
+
+            newTransaction.DestinationAccount = destination;
+            newTransaction.IsRecurrent = false;
+            newTransaction.RecurrenceRule = null;
+            newTransaction.Notes = TransactionNotes.Text;
+
+            ViewModel<Transaction> transactionVM = new ViewModel<Transaction>();
+            transactionVM.Insert(newTransaction);
+
+            List<Transaction> transactions = transactionVM.FetchAll();
+        }
+
+        private void Amount_GotFocus(object sender, RoutedEventArgs e)
+        {
+
+            if (sender is TextBox)
+            {
+                TextBox box = (TextBox)sender;
+
+                if (!String.IsNullOrWhiteSpace(box.Text))
+                {
+                    box.Text = box.Text.Replace("$", "").TrimStart();
+                    box.SelectAll();
+                }
+            }            
+        }
+
+        private void Amount_LostFocus(object sender, RoutedEventArgs e)
+        {
+
+            if (sender is TextBox)
+            {
+                TextBox box = (TextBox)sender;
+                double amount;
+
+                if (Double.TryParse(box.Text, out amount))
+                {
+                    box.Text = Double.Parse(box.Text).ToString("C");
+                }
+                else
+                {
+                    box.Text = "";
+                }
+            }
+            
+        }
+
     }
 
     public class NavigationItem

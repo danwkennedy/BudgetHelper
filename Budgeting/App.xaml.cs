@@ -1,20 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BudgetHelper.Models;
+using BudgetHelper.Views;
+using System;
 using System.IO;
-using System.Linq;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using BudgetHelper.Models;
-using BudgetHelper.Views;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -67,6 +58,8 @@ namespace BudgetHelper
                     // Create the tables if they don't exist
                     db.CreateTable<Budget>();
                     db.CreateTable<BudgetEnvelope>();
+                    db.CreateTable<Account>();
+                    db.CreateTable<Transaction>();
 
                     db.DeleteAll<Budget>();
 

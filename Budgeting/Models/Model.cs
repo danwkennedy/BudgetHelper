@@ -7,13 +7,16 @@ using SQLite;
 
 namespace BudgetHelper.Models
 {
-
-    class BudgetEnvelope
+    public class Model
     {
+        
         [PrimaryKey, AutoIncrement, Unique]
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string PercentageOfBudget { get; set; }
-        public string BudgetId { get; set; }
+        public int Id
+        {
+            get;
+            set;
+        }
+
+        public Model() { }
     }
 }

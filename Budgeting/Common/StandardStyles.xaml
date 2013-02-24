@@ -142,7 +142,7 @@
     </Style>
 
     <!-- Button styles -->
-    
+
     <!--
         TextButtonStyle is used to style a Button using subheader-styled text with no other adornment.  There
         are two styles that are based on TextButtonStyle (TextPrimaryButtonStyle and TextSecondaryButtonStyle)
@@ -231,6 +231,203 @@
 
     <Style x:Key="TextSecondaryButtonStyle" TargetType="ButtonBase" BasedOn="{StaticResource TextButtonStyle}">
         <Setter Property="Foreground" Value="{StaticResource ApplicationSecondaryForegroundThemeBrush}"/>
+    </Style>
+
+    <!--
+        Checkbox style
+    -->
+    <SolidColorBrush x:Key="CheckBoxBackgroundThemeBrush" Color="#CCFFFFFF" />
+    <SolidColorBrush x:Key="CheckBoxBorderThemeBrush" Color="#CCFFFFFF" />
+    <SolidColorBrush x:Key="CheckBoxContentDisabledForegroundThemeBrush" Color="#66FFFFFF" />
+    <SolidColorBrush x:Key="CheckBoxContentForegroundThemeBrush" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="CheckBoxDisabledBackgroundThemeBrush" Color="#66FFFFFF" />
+    <SolidColorBrush x:Key="CheckBoxDisabledBorderThemeBrush" Color="#66FFFFFF" />
+    <SolidColorBrush x:Key="CheckBoxDisabledForegroundThemeBrush" Color="#66000000" />
+    <SolidColorBrush x:Key="CheckBoxForegroundThemeBrush" Color="#FF000000" />
+    <SolidColorBrush x:Key="CheckBoxPointerOverBackgroundThemeBrush" Color="#DEFFFFFF" />
+    <SolidColorBrush x:Key="CheckBoxPointerOverBorderThemeBrush" Color="#DEFFFFFF" />
+    <SolidColorBrush x:Key="CheckBoxPointerOverForegroundThemeBrush" Color="#FF000000" />
+    <SolidColorBrush x:Key="CheckBoxPressedBackgroundThemeBrush" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="CheckBoxPressedBorderThemeBrush" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="CheckBoxPressedForegroundThemeBrush" Color="#FF000000" />
+    
+    <Style TargetType="CheckBox" x:Name="CheckboxStyle">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource CheckBoxContentForegroundThemeBrush}"/>
+        <Setter Property="Padding" Value="2,3,0,0" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
+        <Setter Property="FontFamily" Value="{StaticResource ContentControlThemeFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource ControlContentThemeFontSize}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="PointerOver">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NormalRectangle"
+                                                                   Storyboard.TargetProperty="Fill">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckBoxPointerOverBackgroundThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NormalRectangle"
+                                                                   Storyboard.TargetProperty="Stroke">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckBoxPointerOverBorderThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph"
+                                                                   Storyboard.TargetProperty="Fill">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckBoxPointerOverForegroundThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="IndeterminateGlyph"
+                                                                   Storyboard.TargetProperty="Fill">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckBoxPointerOverForegroundThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NormalRectangle"
+                                                                   Storyboard.TargetProperty="Fill">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckBoxPressedBackgroundThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NormalRectangle"
+                                                                   Storyboard.TargetProperty="Stroke">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckBoxPressedBorderThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph"
+                                                                   Storyboard.TargetProperty="Fill">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckBoxPressedForegroundThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="IndeterminateGlyph"
+                                                                   Storyboard.TargetProperty="Fill">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckBoxPressedForegroundThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NormalRectangle"
+                                                                   Storyboard.TargetProperty="Fill">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckBoxDisabledBackgroundThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NormalRectangle"
+                                                                   Storyboard.TargetProperty="Stroke">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckBoxDisabledBorderThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph"
+                                                                   Storyboard.TargetProperty="Fill">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckBoxDisabledForegroundThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="IndeterminateGlyph"
+                                                                   Storyboard.TargetProperty="Fill">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckBoxDisabledForegroundThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                   Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CheckBoxContentDisabledForegroundThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="CheckStates">
+                                <VisualState x:Name="Checked">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="CheckGlyph"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     To="1"
+                                                     Duration="0" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Unchecked" />
+                                <VisualState x:Name="Indeterminate">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="IndeterminateGlyph"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     To="1"
+                                                     Duration="0" />
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="FocusStates">
+                                <VisualState x:Name="Focused">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="FocusVisualWhite"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     To="1"
+                                                     Duration="0" />
+                                        <DoubleAnimation Storyboard.TargetName="FocusVisualBlack"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     To="1"
+                                                     Duration="0" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Unfocused" />
+                                <VisualState x:Name="PointerFocused" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="27" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid VerticalAlignment="Top">
+                                <Rectangle x:Name="NormalRectangle"
+                                       Fill="{StaticResource CheckBoxBackgroundThemeBrush}"
+                                       Stroke="{StaticResource CheckBoxBorderThemeBrush}"
+                                       StrokeThickness="{StaticResource CheckBoxBorderThemeThickness}"
+                                       UseLayoutRounding="False"
+                                       Height="21"
+                                       Width="21" />
+                                <Path x:Name="CheckGlyph"
+                                  Data="F1 M 0,58 L 2,56 L 6,60 L 13,51 L 15,53 L 6,64 z"
+                                  Fill="{StaticResource CheckBoxForegroundThemeBrush}"
+                                  Height="14"
+                                  Stretch="Fill"
+                                  Width="16"
+                                  Opacity="0"
+                                  FlowDirection="LeftToRight" />
+                                <Rectangle x:Name="IndeterminateGlyph"
+                                       Width="9"
+                                       Height="9"
+                                       Fill="{StaticResource CheckBoxForegroundThemeBrush}"
+                                       Opacity="0"
+                                       UseLayoutRounding="False" />
+                                <Rectangle x:Name="FocusVisualWhite"
+                                       Stroke="{StaticResource FocusVisualWhiteStrokeThemeBrush}"
+                                       StrokeEndLineCap="Square"
+                                       StrokeDashArray="1,1"
+                                       Opacity="0"
+                                       StrokeDashOffset="0.5"
+                                       Width="27"
+                                       Height="27" />
+                                <Rectangle x:Name="FocusVisualBlack"
+                                       Stroke="{StaticResource FocusVisualBlackStrokeThemeBrush}"
+                                       StrokeEndLineCap="Square"
+                                       StrokeDashArray="1,1"
+                                       Opacity="0"
+                                       StrokeDashOffset="1.5"
+                                       Width="27"
+                                       Height="27" />
+                            </Grid>
+                            <ContentPresenter x:Name="ContentPresenter"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          ContentTransitions="{TemplateBinding ContentTransitions}"
+                                          Content="{TemplateBinding Content}"
+                                          Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Grid.Column="1" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <!--
@@ -418,6 +615,12 @@
         <Setter Property="Content" Value="&#xE109;"/>
     </Style>
 
+    <Style x:Key="DeleteAppBarButtonStyle" TargetType="ButtonBase" BasedOn="{StaticResource AppBarButtonStyle}">
+        <Setter Property="AutomationProperties.AutomationId" Value="DeleteAppBarButton"/>
+        <Setter Property="AutomationProperties.Name" Value="Delete"/>
+        <Setter Property="Content" Value="&#xE106;"/>
+    </Style>
+
     <!--
     
     <Style x:Key="SkipBackAppBarButtonStyle" TargetType="ButtonBase" BasedOn="{StaticResource AppBarButtonStyle}">
@@ -444,11 +647,6 @@
         <Setter Property="AutomationProperties.AutomationId" Value="SaveAppBarButton"/>
         <Setter Property="AutomationProperties.Name" Value="Save"/>
         <Setter Property="Content" Value="&#xE105;"/>
-    </Style>
-    <Style x:Key="DeleteAppBarButtonStyle" TargetType="ButtonBase" BasedOn="{StaticResource AppBarButtonStyle}">
-        <Setter Property="AutomationProperties.AutomationId" Value="DeleteAppBarButton"/>
-        <Setter Property="AutomationProperties.Name" Value="Delete"/>
-        <Setter Property="Content" Value="&#xE106;"/>
     </Style>
     <Style x:Key="DiscardAppBarButtonStyle" TargetType="ButtonBase" BasedOn="{StaticResource AppBarButtonStyle}">
         <Setter Property="AutomationProperties.AutomationId" Value="DiscardAppBarButton"/>
